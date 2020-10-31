@@ -102,7 +102,7 @@ public class FlightServiceImpl implements FlightService {
     }
 
     private boolean isFlightExist(String from, String to) {
-        return data.containsKey(from) || data.get(from).containsKey(to);
+        return data.containsKey(from) && data.get(from).containsKey(to);
     }
 
     private boolean isDefaultFlightExist() {

@@ -15,7 +15,12 @@ public class ConsoleUtils {
                 NEW_LINE +
                 "2. To load data from use commands 'l' or 'load'" +
                 NEW_LINE +
-                "Optional: You can use path to your custom file, as default will be used embedded data";
+                "Optional: You can use path to your custom file, as default will be used embedded data" +
+                NEW_LINE +
+                "3. To find the highest and the lowest price of flight use commands 'max' and 'min'" +
+                NEW_LINE +
+                "Optional: You can set your custom 'to' and 'from' directions, as default will be used 'Москва' and 'Хабаровск'"
+                ;
     }
 
     public static String listToString(List<Flight> list) {
