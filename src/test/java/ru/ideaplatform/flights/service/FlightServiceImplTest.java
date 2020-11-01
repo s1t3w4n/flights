@@ -10,6 +10,7 @@ import org.springframework.shell.jline.ScriptShellApplicationRunner;
 import ru.ideaplatform.flights.exception.NotJsonFileFormat;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -31,7 +32,7 @@ class FlightServiceImplTest {
 
     @DisplayName("Should return default data with empty path")
     @Test
-    void shouldReturnDefaultDataWithEmptyPath() throws NotJsonFileFormat, FileNotFoundException {
+    void shouldReturnDefaultDataWithEmptyPath() throws NotJsonFileFormat, IOException {
         assertThat(service.load(EMPTY_PATH_PARAMETER)).hasSize(6);
     }
 

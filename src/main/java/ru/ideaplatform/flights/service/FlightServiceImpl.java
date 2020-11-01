@@ -10,9 +10,10 @@ import ru.ideaplatform.flights.exception.ThereIsNoSuchFlightException;
 import ru.ideaplatform.flights.model.Flight;
 import ru.ideaplatform.flights.model.Flights;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class FlightServiceImpl implements FlightService {
     private Map<String, Map<String, LinkedList<Flight>>> data;
 
     @Override
-    public List<Flight> load(String path) throws NotJsonFileFormat, FileNotFoundException {
+    public List<Flight> load(String path) throws NotJsonFileFormat, IOException {
         JsonReader reader = new JsonReader(getReader(path));
         Flights asList = gson.fromJson(reader, Flights.class);
         data = fillData(asList);
@@ -76,14 +77,14 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
-    private InputStreamReader getReader(String path) throws NotJsonFileFormat, FileNotFoundException {
+    private InputStreamReader getReader(String path) throws NotJsonFileFormat, IOException {
         if (path.isEmpty()) {
             ClassLoader classLoader = getClass().getClassLoader();
-            return new InputStreamReader(Objects.requireNonNull(classLoader.getResourceAsStream(DEFAULT_FILE)));
+            return new InputStreamReader(Objects.requireNonNull(classLoader.getResourceAsStream(DEFAULT_FILE)), StandardCharsets.UTF_8);
         } else if (!path.endsWith(".json")) {
             throw new NotJsonFileFormat();
         } else {
-            return new FileReader(path);
+            return new FileReader(path, StandardCharsets.UTF_8);
         }
     }
 
