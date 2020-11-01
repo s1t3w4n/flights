@@ -34,6 +34,7 @@ public class FlightServiceImpl implements FlightService {
         return Arrays.asList(asList.getFlights());
     }
 
+    //TODO refactor duplicated code
     @Override
     public Flight findLowestPrice(String from, String to) throws ThereIsNoSuchFlightException, NoDataException {
         if (data.isEmpty()) {
@@ -47,6 +48,7 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
+    //TODO refactor duplicated code
     @Override
     public Flight findHighestPrice(String from, String to) throws ThereIsNoSuchFlightException, NoDataException {
         if (data.isEmpty()) {
@@ -60,6 +62,7 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
+    //TODO refactor duplicated code
     @Override
     public double findAveragePrice(String from, String to) throws ThereIsNoSuchFlightException, NoDataException {
         if (data.isEmpty()) {

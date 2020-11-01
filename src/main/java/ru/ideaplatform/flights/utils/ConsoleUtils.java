@@ -17,11 +17,12 @@ public class ConsoleUtils {
                 NEW_LINE +
                 "Optional: You can use path to your custom file, as default will be used embedded data" +
                 NEW_LINE +
-                "3. To find the highest and the lowest price of flight use commands 'max' and 'min'" +
+                "3. To find a highest and lowest price of flight use commands 'max' and 'min'" +
                 NEW_LINE +
                 "Optional: You can set your custom 'to' and 'from' directions, as default will be used 'Москва' and 'Хабаровск'" +
                 NEW_LINE +
                 "4. To find an average price of flights of the current direction use commands 'a','ave' or 'average'" +
+                NEW_LINE +
                 "Optional: You can set your custom 'to' and 'from' directions, as default will be used 'Москва' and 'Хабаровск'"
                 ;
     }
