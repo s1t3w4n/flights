@@ -19,6 +19,9 @@ public class ConsoleUtils {
                 NEW_LINE +
                 "3. To find the highest and the lowest price of flight use commands 'max' and 'min'" +
                 NEW_LINE +
+                "Optional: You can set your custom 'to' and 'from' directions, as default will be used 'Москва' and 'Хабаровск'" +
+                NEW_LINE +
+                "4. To find an average price of flights of the current direction use commands 'a','ave' or 'average'" +
                 "Optional: You can set your custom 'to' and 'from' directions, as default will be used 'Москва' and 'Хабаровск'"
                 ;
     }
@@ -28,4 +31,5 @@ public class ConsoleUtils {
                 .map(String::valueOf)
                 .collect(Collectors.joining(";\n"));
     }
+
 }

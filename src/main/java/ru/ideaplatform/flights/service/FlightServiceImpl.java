@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -59,6 +60,19 @@ public class FlightServiceImpl implements FlightService {
         }
     }
 
+    @Override
+    public double findAveragePrice(String from, String to) throws ThereIsNoSuchFlightException, NoDataException {
+        if (data.isEmpty()) {
+            throw new NoDataException();
+        } else if (isDefaultFlightExist() && from.isEmpty() || to.isEmpty()) {
+            return calcAveragePrice(data.get(DEFAULT_FROM).get(DEFAULT_TO));
+        } else if (isFlightExist(from, to)) {
+            return calcAveragePrice(data.get(from).get(to));
+        } else {
+            throw new ThereIsNoSuchFlightException();
+        }
+    }
+
     private InputStreamReader getReader(String path) throws NotJsonFileFormat, FileNotFoundException {
         if (path.isEmpty()) {
             ClassLoader classLoader = getClass().getClassLoader();
@@ -66,7 +80,7 @@ public class FlightServiceImpl implements FlightService {
         } else if (!path.endsWith(".json")) {
             throw new NotJsonFileFormat();
         } else {
-            return new FileReader(path.replaceAll("\\\\", "/"));
+            return new FileReader(path);
         }
     }
 
@@ -107,6 +121,12 @@ public class FlightServiceImpl implements FlightService {
 
     private boolean isDefaultFlightExist() {
         return isFlightExist(DEFAULT_FROM, DEFAULT_TO);
+    }
+
+    private double calcAveragePrice(List<Flight> flights) {
+        return Arrays.stream(flights.stream().map(Flight::getPrice).collect(Collectors.toList())
+                .stream().mapToInt(Integer::intValue).toArray())
+                .average().orElse(Double.NaN);
     }
 
 }

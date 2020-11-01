@@ -41,10 +41,19 @@ public class ShellCommands implements PromptProvider, Help.Command {
         }
     }
 
-    @ShellMethod(value = "Find lowest price of flight")
+    @ShellMethod(value = "Find highest price of flight")
     public String max(@ShellOption(defaultValue = "") String from, @ShellOption(defaultValue = "") String to) {
         try {
             return service.findHighestPrice(from, to).toString();
+        } catch (ThereIsNoSuchFlightException | NoDataException e) {
+            return e.getMessage();
+        }
+    }
+
+    @ShellMethod(value = "Find average price of flight", key = {"a", "ave", "average"})
+    public String average(@ShellOption(defaultValue = "") String from, @ShellOption(defaultValue = "") String to) {
+        try {
+            return String.format( "%.2f", service.findAveragePrice(from, to));
         } catch (ThereIsNoSuchFlightException | NoDataException e) {
             return e.getMessage();
         }
